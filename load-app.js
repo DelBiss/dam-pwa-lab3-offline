@@ -55,8 +55,11 @@ function ShowContent(contentArray) {
 
 function LoadApp() {
     const allContent = Promise.all([
-        PreloadAllCss(["/bootstrap-5.1.3-dist/css/bootstrap.min.css ", "/icons-1.7.2/font/bootstrap-icons.css"]),
-        FetchApp("/index-sw.html")
+        PreloadAllCss([
+            "./bootstrap-5.1.3-dist/css/bootstrap.min.css ",
+            "./icons-1.7.2/font/bootstrap-icons.css"
+        ]),
+        FetchApp("./index-sw.html")
     ])
     allContent.then(
         ShowContent

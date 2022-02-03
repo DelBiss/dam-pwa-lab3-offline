@@ -32,13 +32,13 @@ self.addEventListener('install', (event) => {
         caches.open(self.version).then(function(cache) {
             console.log("Caching new version")
             return cache.addAll([
-                "/index.html",
-                "/load-sw.js",
-                "/style/load-sw.css",
-                "/load-app.js",
-                "/bootstrap-5.1.3-dist/css/bootstrap.min.css ",
-                "/icons-1.7.2/font/bootstrap-icons.css",
-                "/index-sw.html"
+                "./index.html",
+                "./load-sw.js",
+                "./style/load-sw.css",
+                "./load-app.js",
+                "./bootstrap-5.1.3-dist/css/bootstrap.min.css ",
+                "./icons-1.7.2/font/bootstrap-icons.css",
+                "./index-sw.html"
             ]);
         })
     );
