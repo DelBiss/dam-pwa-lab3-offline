@@ -1,4 +1,4 @@
-self.version = "V01"
+self.version = "V02"
 const cacheKeeplist = [self.version]
 console.log(self.version, "Service worker")
 
@@ -38,7 +38,8 @@ self.addEventListener('install', (event) => {
                 "./load-app.js",
                 "./bootstrap-5.1.3-dist/css/bootstrap.min.css ",
                 "./icons-1.7.2/font/bootstrap-icons.css",
-                "./index-sw.html"
+                "./index-sw.html",
+                "./bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"
             ]);
         })
     );
