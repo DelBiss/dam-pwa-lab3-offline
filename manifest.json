@@ -1,0 +1,14 @@
+{
+    "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+    "name": "La famille Rousse",
+    "short_name": "Rousse",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#ff0",
+    "description": "La famille Rousse",
+    "icons": [{
+        "src": "img/sun.png",
+        "sizes": "256x256",
+        "type": "image/png"
+    }]
+}

@@ -1,4 +1,4 @@
-self.version = "V02"
+self.version = "V01"
 const cacheKeeplist = [self.version]
 console.log(self.version, "Service worker")
 
