@@ -16,8 +16,8 @@ async function waitForPageLoad(){
     )
 }
 self.addEventListener('sync', function(event) {
-    console.log(self.version,"Sync Event", event)
     if (event.tag == 'syncOffline') {
+        console.log(self.version,"Sync Event", event)
         event.waitUntil(
             waitForPageLoad()
         )
