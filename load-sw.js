@@ -14,11 +14,7 @@ if ('serviceWorker' in navigator) {
     });
   }
 
-  if ('serviceWorker' in navigator && 'SyncManager' in window) {
-    navigator.serviceWorker.ready.then(function(reg) {
-        return reg.sync.register('c');
-    });
-   }
+ 
    
   async function LaunchInstall(){
     console.log('👍', 'butInstall-clicked');

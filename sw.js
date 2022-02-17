@@ -8,7 +8,16 @@ console.log(self.version, "Service worker")
 self.addEventListener('sync', function(event) {
     console.log(self.version,"Sync Event", event)
     if (event.tag == 'syncOffline') {
-        self.registration.showNotification("La page est maintenant disponible");
+        return event.waitUntil(
+            ()=>{
+                fetch("/index2.html").then(
+                    () =>{
+                        self.registration.showNotification("La page est maintenant disponible");
+                    }
+                )
+                
+            }
+        )
     }
    });
    
@@ -84,83 +93,7 @@ self.addEventListener('fetch', function(event) {
     const requestURL = new URL(event.request.url)
     console.debug("Fetch:", event.request,"doNotCache",doNotCache.includes(fichier),"isSameOrigin",isSameOrigin(requestURL), "IsOnline",navigator.onLine)
     return event.respondWith(FetchCache(event.request))
-    // if(doNotCache.includes(fichier)){
-    //     console.log( "Not Cache fetch Request", fichier)
-    //     return event.respondWith(
-    //         fetch(event.request)
-    //         .then(
-    //             (fetchResponse)=>{
-    //                 console.log(fichier, "Not Cache fetch response", fetchResponse)
-    //                 return fetchResponse
-    //             }
-    //         )
-    //         .catch(
-    //             (reason)=>{
-    //                 requestURL.pathname = "/index_offline.html"
-    //                 console.log("Not Online",requestURL)
-    //                 return (fetch())
-    //             }
-    //         )
-    //     )
-    // }
-    // else if (!isSameOrigin(requestURL)){
-    //     return event.respondWith(
-    //         fetch(event.request)
-    //     )
-    // }
-    // else{
-    //     event.respondWith(
-    //         fetch(event.request)
-    //         .then(
-    //             function(response) {
-    //                 // response may be used only once
-    //                 // we need to save clone to put one copy in cache
-    //                 // and serve second one
-    //                 // console.log("FETCH RESPONDED, Put in cache")
-    //                 let responseClone = response.clone();
-
-    //                 caches.open(self.version).then(function(cache) {
-    //                     cache.put(event.request, responseClone);
-    //                 });
-    //                 return response;
-    //             }
-    //         )
-    //         .catch( 
-    //             () => {
-    //                 // console.log("FETCH Fail, Look in cache")
-    //                 return caches.match(event.request)
-    //                 .then(
-    //                     function(response) {
-    //                         // caches.match() always resolves
-    //                         // but in case of success response will have value
-    //                         if (response !== undefined) {
-    //                             // console.log("cache RESPONDED",response)
-    //                             return response;
-    //                         } else {
-    //                             // console.log("cache faild")
-    //                             return fetch(event.request).then(
-    //                                 function(response) {
-    //                                     // response may be used only once
-    //                                     // we need to save clone to put one copy in cache
-    //                                     // and serve second one
-    //                                     let responseClone = response.clone();
-
-    //                                     caches.open(self.version).then(
-    //                                         function(cache) {
-    //                                             cache.put(event.request, responseClone);
-    //                                         }
-    //                                     );
-    //                                     return response;
-    //                                 }
-    //                             )
-    //                         }
-    //                     }
-    //                 )
-    //             }
-    //         )
-    //     );
-    // }
-    
+        
 })
 
 
