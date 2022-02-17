@@ -1,18 +1,8 @@
 const RSS_URL = `https://ici.radio-canada.ca/rss/4159`;
-const Offline_Url = "./index_offline.html"
+
 console.log("starting")
 
-async function fetchBackgroudSync(){
-    console.log("fetchBackGroud",location)
-    return fetch(Offline_Url)
-    .then(response => response.text())
-    .then(str => new window.DOMParser().parseFromString(str, "text/html"))
-    .then(data => {
-            const backSyncHtml = data.getElementById("backSync")
-            document.getElementById('container').appendChild(backSyncHtml);
-        }
-    )
-}
+
 async function fetchRss(){
   return fetch(RSS_URL)
     .then(response => response.text())
@@ -58,4 +48,5 @@ async function fetchRss(){
     });
   }
 
-  fetchRss().catch(()=>{fetchBackgroudSync()})
+  //If the fetch fail, that mean we are offline. Reload to show the Offline Page.
+  fetchRss().catch(()=>{location.reload()})
