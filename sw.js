@@ -7,7 +7,7 @@ console.log(self.version, "Service worker")
 
 async function waitForPageLoad(){
     console.log("!!WAIT!!!")
-    return fetch("./index2.html").then(
+    return fetch("https://ici.radio-canada.ca/rss/4159").then(
         (response)=>{
             console.log("=========== RESPONSE")
             self.registration.showNotification("La page est maintenant disponible")
