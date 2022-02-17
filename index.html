@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -7,20 +7,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La famille Rousse</title>
     <link rel="manifest" href="manifest.json">
-    <script src="./load-sw.js"></script>
-    <script src="./load-app.js"></script>
+    <link rel="stylesheet" href="./bootstrap-5.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./icons-1.7.2/font/bootstrap-icons.css">
+    <style>
+        .hidden {
+            display: none !important;
+        }
+    </style>
+    
     <script src="bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        const load_sw_css = AddCss("./style/load-sw.css")
-        InstallServiceWorker().then(LoadApp)
-    </script>
 </head>
 
 <body>
-    <div class="content">
-        <div class="lds-hourglass"></div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <h1 class="navbar-brand"><i class="bi-sun"></i> La famille Rousse</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav nav-pills ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item "><a href="#" class="nav-link active px-1 px-lg-2" aria-current="page">Ses membres</a></li>
+                    <li class="nav-item "><a href="index2.html" class="nav-link px-1 px-lg-2">Actualité</a></li>
+    
+                </ul>
+    
+            </div>
+        </div>
+    </nav>
+    <div id="installContainer" class="alert alert-primary alert-dismissible fade show hidden" role="alert">
+        <button id="butInstall" type="button" class="btn btn-primary">Installer</button>
+         l'Application Web Progressive
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+    <main class=" pt-3">
+        <h1 class="text-center display-4 fw-bold">Membres de la famille</h1>
+        <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+            <div class="container-lg row align-items-start gy-4 ">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="ratio ratio-1x1">
+                            <img src="img/philippe.jpg" class="card-img-top" style="object-fit: cover;" alt="...">
+                        </div>
+    
+                        <div class="card-body">
+                            <h5 class="card-title">Philippe Allard-Rousse</h5>
+                            <p class="card-text">Papa dévouer</p>
+                            <a href="#" class="btn btn-primary">Envoyer lui de l'amour</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="ratio ratio-1x1">
+                            <img src="img/guillaume.jpg" style="object-fit: cover;" class="card-img-top" alt="...">
+    
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Guillaume Rousse</h5>
+                            <p class="card-text">Auteur-compositeur</p>
+                            <a href="#" class="btn btn-primary">Envoyer lui de l'amour</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="ratio ratio-1x1">
+                            <img src="img/zac.jpg" class="card-img-top" style="object-fit: cover;" alt="..."></div>
+                        <div class="card-body">
+                            <h5 class="card-title">Zacharie Rousse</h5>
+                            <p class="card-text">Futur ingénieur</p>
+                            <a href="#" class="btn btn-primary">Envoyer lui de l'amour</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="card">
+                        <div class="ratio ratio-1x1">
+                            <img src="img/charle.jpg" class="card-img-top" style="object-fit: cover;" alt="..."></div>
+    
+    
+                        <div class="card-body">
+                            <h5 class="card-title">Charle-Antoine Rousse Rousse</h5>
+                            <p class="card-text">Artiste en devenir</p>
+                            <a href="#" class="btn btn-primary">Envoyer lui de l'amour</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script src="./load-sw.js" defer></script>
+    
+                                    
 </body>
 
 </html>

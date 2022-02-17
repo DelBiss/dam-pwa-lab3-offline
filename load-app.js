@@ -1,67 +1,60 @@
-//@ts-check
+const RSS_URL = `https://ici.radio-canada.ca/rss/4159`;
+const Offline_Url = "/index_offline.html"
+console.log("starting")
 
-/**
- * 
- * @param {Array<string>} urls 
- */
-function PreloadAllCss(urls) {
-    return Promise.all(urls.map(PreloadCss))
-}
-
-/**
- * 
- * @param {string} url 
- * @returns {Promise<HTMLLinkElement>}
- */
-function PreloadCss(url) {
-    let head = document.head;
-    let link = document.createElement('link');
-    link.type = 'text/css';
-    link.rel = 'preload';
-    link.as = "style"
-
-    const linkPromise = new Promise((resolve, reject) => {
-        link.onload = function() { resolve(link) }
-        link.href = url;
-        head.appendChild(link);
-    })
-
-    return linkPromise
-}
-
-function FetchApp(url) {
-    return fetch(url)
-        .then(
-            (content) => {
-                return content.text()
-            }
-        )
-}
-
-function ShowContent(contentArray) {
-    for (const content of contentArray) {
-        if (Array.isArray(content)) {
-            ShowContent(content)
-        } else if (content instanceof HTMLLinkElement) {
-            content.rel = "stylesheet"
-        } else if (typeof content === "string") {
-            document.body.innerHTML = content
-        } else {
-            console.error("Content isn'T a supported type")
+async function fetchBackgroudSync(){
+    return fetch(Offline_Url)
+    .then(response => response.text())
+    .then(str => new window.DOMParser().parseFromString(str, "text/html"))
+    .then(data => {
+            const backSyncHtml = data.getElementById("backSync")
+            document.getElementById('container').appendChild(backSyncHtml);
         }
-
-    }
-}
-
-function LoadApp() {
-    const allContent = Promise.all([
-        PreloadAllCss([
-            "./bootstrap-5.1.3-dist/css/bootstrap.min.css ",
-            "./icons-1.7.2/font/bootstrap-icons.css"
-        ]),
-        FetchApp("./index-sw.html")
-    ])
-    allContent.then(
-        ShowContent
     )
 }
+async function fetchRss(){
+  return fetch(RSS_URL)
+    .then(response => response.text())
+    .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+    .then(data => {
+      // console.log(data);
+      const items = [...data.querySelectorAll("item")
+                    ];
+      let html = ``;
+      items.slice(0,6).forEach(el => {
+        // console.log(el)
+        const article = {
+          image: el.querySelector("enclosure")?el.querySelector("enclosure").getAttribute("url"):"https://images.radio-canada.ca/v1/infolettres/logo/perso/info-nationale-infolettre.jpg",
+          title: el.querySelector("title").childNodes[0].nodeValue,
+          description: el.querySelector("description").childNodes[0].nodeValue,
+          link: el.querySelector("link").childNodes[0].nodeValue
+        }
+        
+        html += `
+          <article class="col">
+              <div class="card h-100">
+                  <div >
+                      <img style="object-fit: fill;" class="card-img-top" src="${article.image}" alt="">
+                  </div>
+                  <div class="card-body">
+                      <h5 class="card-title">
+                          
+                              ${article.title}
+                          
+                      </h5>
+                      <div class="card-text">
+                          ${article.description}
+                      </div>
+                  </div>
+                  <div class="card-footer">
+                      <a href="${article.link}" class="btn btn-primary">Voir la nouvelle</a>
+                  </div> 
+              </div>   
+          </article>
+        `;
+      });
+      document.getElementById('content').insertAdjacentHTML("beforeend", html);
+    });
+  }
+
+  fetchRss().catch(()=>{fetchBackgroudSync()})
