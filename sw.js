@@ -5,11 +5,21 @@ const doNotCache =[
 ]
 console.log(self.version, "Service worker")
 
+async function waitForPageLoad(){
+    console.log("!!WAIT!!!")
+    return fetch("./index2.html").then(
+        (response)=>{
+            console.log("=========== RESPONSE")
+            self.registration.showNotification("La page est maintenant disponible")
+            return response
+        }
+    )
+}
 self.addEventListener('sync', function(event) {
     console.log(self.version,"Sync Event", event)
     if (event.tag == 'syncOffline') {
         event.waitUntil(
-            self.registration.showNotification("La page est maintenant disponible")
+            waitForPageLoad()
         )
     }
    });
