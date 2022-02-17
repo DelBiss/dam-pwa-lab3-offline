@@ -1,5 +1,5 @@
 const RSS_URL = `https://ici.radio-canada.ca/rss/4159`;
-const Offline_Url = "/index_offline.html"
+const Offline_Url = "./index_offline.html"
 console.log("starting")
 
 async function fetchBackgroudSync(){
