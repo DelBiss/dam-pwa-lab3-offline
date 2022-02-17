@@ -79,7 +79,7 @@ async function FetchCache(eventRequest){
 self.addEventListener('fetch', function(event) {
     const fichier = event.request.url.split("/").splice(-1)[0]
     const requestURL = new URL(event.request.url)
-    console.debug("Fetch:", event.request,"doNotCache",doNotCache.includes(fichier),"isSameOrigin",isSameOrigin(event.request.url), "IsOnline",navigator.onLine)
+    console.debug("Fetch:", event.request,"doNotCache",doNotCache.includes(fichier),"isSameOrigin",isSameOrigin(requestURL), "IsOnline",navigator.onLine)
     return event.respondWith(FetchCache(event.request))
     // if(doNotCache.includes(fichier)){
     //     console.log( "Not Cache fetch Request", fichier)
