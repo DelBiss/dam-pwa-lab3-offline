@@ -3,6 +3,7 @@ const Offline_Url = "./index_offline.html"
 console.log("starting")
 
 async function fetchBackgroudSync(){
+    console.log("fetchBackGroud",location)
     return fetch(Offline_Url)
     .then(response => response.text())
     .then(str => new window.DOMParser().parseFromString(str, "text/html"))
