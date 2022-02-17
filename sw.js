@@ -68,8 +68,9 @@ async function FetchCache(eventRequest){
         ()=>{
             let cacheRequestUrl = eventRequest.url
             if(doNotCache.includes(fichier)){
-                requestURL.pathname = "/index_offline.html"
-                cacheRequestUrl = requestURL.toString()
+                pathSplit = requestURL.pathname.split("/")
+                pathSplit[pathSplit.length-1] = "index_offline.html"
+                cacheRequestUrl = pathSplit.join("/")
             }
             console.log("Looking into cache for", cacheRequestUrl)
             return caches.match(cacheRequestUrl)
