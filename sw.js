@@ -8,7 +8,7 @@ console.log(self.version, "Service worker")
 self.addEventListener('sync', function(event) {
     console.log(self.version,"Sync Event", event)
     if (event.tag == 'syncOffline') {
-        return event.waitUntil(
+        event.waitUntil(
             ()=>{
                 fetch("./index2.html").then(
                     () =>{
