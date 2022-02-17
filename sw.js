@@ -31,6 +31,8 @@ self.addEventListener('install', (event) => {
                 "./img/guillaume.jpg",
                 "./img/philippe.jpg",
                 "./img/zac.jpg",
+                "./img/offline-internet.png",
+                "./img/sun.png",
             ]);
         })
     );
