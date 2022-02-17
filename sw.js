@@ -38,6 +38,7 @@ self.addEventListener('install', (event) => {
 })
 function isSameOrigin(url) {
     const urlOrigin = (url).origin;
+    console.log("SAME ORIGIN",self.location.origin, urlOrigin)
     return urlOrigin === self.location.origin;
   }
 
