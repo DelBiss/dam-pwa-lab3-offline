@@ -9,14 +9,7 @@ self.addEventListener('sync', function(event) {
     console.log(self.version,"Sync Event", event)
     if (event.tag == 'syncOffline') {
         event.waitUntil(
-            ()=>{
-                fetch("./index2.html").then(
-                    () =>{
-                        self.registration.showNotification("La page est maintenant disponible");
-                    }
-                )
-                
-            }
+            self.registration.showNotification("La page est maintenant disponible")
         )
     }
    });
