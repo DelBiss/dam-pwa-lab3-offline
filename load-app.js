@@ -12,7 +12,7 @@ async function fetchRss(){
       const items = [...data.querySelectorAll("item")
                     ];
       let html = ``;
-      items.slice(0,6).forEach(el => {
+      items.forEach(el => {
         // console.log(el)
         const article = {
           image: el.querySelector("enclosure")?el.querySelector("enclosure").getAttribute("url"):"https://images.radio-canada.ca/v1/infolettres/logo/perso/info-nationale-infolettre.jpg",
